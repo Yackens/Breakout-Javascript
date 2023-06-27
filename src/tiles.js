@@ -4,21 +4,18 @@ class Tiles {
         this.left = left;
         this.width = width;
         this.height = height;
-        this.directionX = 0;
         this.element = document.createElement("div");
     
         this.element.style.backgroundColor = color;
         this.element.style.position = "absolute";
         this.element.style.width = `${width}px`;
         this.element.style.height = `${height}px`;
-        this.element.style.left = `${left}px`;
-        this.element.style.top = `${top}px`;
         this.element.className = "tiles";
     
         this.gameScreen.appendChild(this.element);
       }
   
-    move() {
+    hit() {
       // Update bar's car position based on directionX
       this.left += this.directionX;
   

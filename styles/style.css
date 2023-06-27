@@ -8,10 +8,17 @@ body {
     padding: 20px 0px;
   }
   
-  #game-container {
+  #game-center {
     display: flex;
     width: 100vw;
     justify-content: center;
+  }
+
+  #game-container {
+    display: none;
+    align-content: center;
+    overflow: hidden;
+    position: relative;
   }
   
   #game-screen-1 {

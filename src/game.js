@@ -52,12 +52,18 @@ class Game {
       // Set the height and width of the game screen
       this.gameScreen1.style.height = `${this.height}px`;
       this.gameScreen1.style.width = `${this.width}px`;
+      this.gameOverall.style.height = `${this.height}px`;
+      this.gameOverall.style.width = `${this.width}px`;
+      
   
       // Hide the start screen and not used tiles
       this.startScreen.style.display = "none";
 
       // Show the game screen
       this.gameScreen1.style.display = "block";
+      this.gameOverall.style.display = "block";
+
+
 
       this.gameLoop();
     }

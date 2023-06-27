@@ -25,8 +25,8 @@ class Bar {
       this.left += this.directionX;
   
       // Ensure the bar stays within the game screen
-      if (this.left < 10) {
-        this.left = 10;
+      if (this.left < 20) {
+        this.left = 20;
       }
       if (this.left > this.gameScreen.offsetWidth - this.width - 10) {
         this.left = this.gameScreen.offsetWidth - this.width - 10;
