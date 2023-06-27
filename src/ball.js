@@ -1,64 +1,76 @@
 class Ball {
-    constructor(gameScreen, left, top, width, height, imgSrc) {
+    constructor(gameScreen, left, top, width, height, color) {
       this.gameScreen = gameScreen;
       this.left = left;
       this.top = top;
       this.width = width;
       this.height = height;
-      this.directionX = 0;
-      this.directionY = 0;
-      this.element = document.createElement("img");
+      this.directionX = Math.random() < 0.5 ? -6 : 6;
+      this.directionY = 4;
+      this.element = document.createElement("div");
   
-      this.element.src = imgSrc;
+      this.element.style.backgroundColor = color;
+      this.element.style.border = "thin solid black";
       this.element.style.position = "absolute";
       this.element.style.width = `${width}px`;
       this.element.style.height = `${height}px`;
       this.element.style.left = `${left}px`;
       this.element.style.top = `${top}px`;
-  
+      this.element.className = "ball";
+
       this.gameScreen.appendChild(this.element);
     }
   
-    move() {
-      // Update player's car position based on directionX and directionY
+    moveBall() {
+      // Update player's ball position based on directionX and directionY
       this.left += this.directionX;
-      this.top += this.directionY;
+      this.top -= this.directionY;
   
-      // Ensure the player's car stays within the game screen
-      if (this.left < 10) {
-        this.left = 10;
+      // Ensure the bar bounces
+      if (this.left < 0 || this.left > this.gameScreen.offsetWidth - this.width) {
+        this.directionX = -this.directionX;
       }
-      if (this.top < 10) {
-        this.top = 10;
-      }
-      if (this.left > this.gameScreen.offsetWidth - this.width - 10) {
-        this.left = this.gameScreen.offsetWidth - this.width - 10;
-      }
-      if (this.top > this.gameScreen.offsetHeight - this.height - 10) {
-        this.top = this.gameScreen.offsetHeight - this.height - 10;
+      if (this.top < 0 || this.top > this.gameScreen.offsetHeight - this.height) {
+        this.directionY = -this.directionY;
       }
   
-      // Update the player's car position on the screen
+      // Update the player's ball position on the screen
       this.updatePosition();
     }
   
-    didCollide(obstacle) {
+    collisionBar(bar) {
       const playerRect = this.element.getBoundingClientRect();
-      const obstacleRect = obstacle.element.getBoundingClientRect();
+      const barRect = bar.element.getBoundingClientRect();
   
       if (
-        playerRect.left < obstacleRect.right &&
-        playerRect.right > obstacleRect.left &&
-        playerRect.top < obstacleRect.bottom &&
-        playerRect.bottom > obstacleRect.top
-      ) {
-        console.log("Crash!");
-  
+        playerRect.left < barRect.right &&
+        playerRect.right > barRect.left &&
+        playerRect.top < barRect.bottom &&
+        playerRect.bottom > barRect.top
+      ) {  
         return true;
       } else {
         return false;
       }
     }
+
+    collisionTiles(tiles) {
+        const playerRect = this.element.getBoundingClientRect();
+        const tilesRect = tiles.element.getBoundingClientRect();
+    
+        if (
+          playerRect.left < tilesRect.right &&
+          playerRect.right > tilesRect.left &&
+          playerRect.top < tilesRect.bottom &&
+          playerRect.bottom > tilesRect.top
+        ) {
+          console.log("Crash!");
+    
+          return true;
+        } else {
+          return false;
+        }
+      }
   
     updatePosition() {
       this.element.style.left = `${this.left}px`;

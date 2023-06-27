@@ -9,63 +9,69 @@ class Game {
       this.gameEndScreen = document.getElementById("game-end");
       this.bar = new Bar(
         this.gameOverall,
-        570,
+        530,
         700,
-        120,
+        140,
         20,
         "./img/bar.jpg"
       );
-      this.tiles_1 = new Tiles(
+      this.ball = new Ball(
         this.gameOverall,
-        10,
-        10,
-        80,
-        20,
-        "green"
-      );
-      this.tiles_2 = new Tiles(
+        580,
+        640,
+        35,
+        35,
+        "yellow"
+      )
+      this.tiles_green = new Tiles(
         this.gameOverall,
-        10,
-        10,
-        80,
-        20,
-        "blue"
+        5,
+        0,
+        "green",
+        "tiles",
       );
-      this.tiles_3 = new Tiles(
+      this.tiles_blue = new Tiles(
         this.gameOverall,
-        50,
-        100,
-        100,
-        20,
-        "orange"
+        5,
+        0,
+        "blue",
+        "tiles",
       );
-
+      this.tiles_orange = new Tiles(
+        this.gameOverall,
+        5,
+        0,
+        "orange",
+        "tiles",
+      );
       this.height = 800;
       this.width = 1200;
       this.obstacles = [];
       this.score = 0;
       this.lives = 3;
       this.gameIsOver = false;
+      this.gameOverall.style.height = `${this.height}px`;
+      this.gameOverall.style.width = `${this.width}px`;
     }
   
     level_1() {
-      // Set the height and width of the game screen
-      this.gameScreen1.style.height = `${this.height}px`;
-      this.gameScreen1.style.width = `${this.width}px`;
-      this.gameOverall.style.height = `${this.height}px`;
-      this.gameOverall.style.width = `${this.width}px`;
-      
-  
-      // Hide the start screen and not used tiles
-      this.startScreen.style.display = "none";
+        // Set the height and width of the game screen
+        this.gameScreen1.style.height = `${this.height}px`;
+        this.gameScreen1.style.width = `${this.width}px`;
+        
+        // Hide the start screen and not used tiles
+        this.startScreen.style.display = "none";
 
-      // Show the game screen
-      this.gameScreen1.style.display = "block";
-      this.gameOverall.style.display = "block";
+        // Show the game screen
+        this.gameScreen1.style.display = "block";
+        this.gameOverall.style.display = "block";
 
+        // Add the tiles
+        this.tiles_green.addLineTiles(80);
+        this.tiles_green.addLineTiles(120);
+        this.tiles_green.addLineTiles(160);
 
-
-      this.gameLoop();
+        this.gameLoop();
     }
 
     level_2() {
@@ -77,12 +83,20 @@ class Game {
         this.gameScreen1.style.display = "none";
         // Show the game screen
         this.gameScreen2.style.display = "block";
-    
+        this.gameOverall.style.display = "block";
+
+
+        // Add the tiles
+        this.tiles_blue.addLineTiles(80);
+        this.tiles_blue.addLineTiles(120);
+        this.tiles_green.addLineTiles(160);
+        this.tiles_green.addLineTiles(200);
+
         //
         this.gameLoop();
-      }
+    }
 
-      level_3() {
+    level_3() {
         // Set the height and width of the game screen
         this.gameScreen3.style.height = `${this.height}px`;
         this.gameScreen3.style.width = `${this.width}px`;
@@ -91,10 +105,19 @@ class Game {
         this.gameScreen2.style.display = "none";
         // Show the game screen
         this.gameScreen3.style.display = "block";
+        this.gameOverall.style.display = "block";
+
+
+        // Add the tiles
+        this.tiles_orange.addLineTiles(80);
+        this.tiles_orange.addLineTiles(120);
+        this.tiles_blue.addLineTiles(160);
+        this.tiles_blue.addLineTiles(200);
+        this.tiles_green.addLineTiles(240);
     
         //
         this.gameLoop();
-      }
+    }
   
     gameLoop() {
       console.log("in the game loop");
@@ -110,6 +133,8 @@ class Game {
   
     update() {
         this.bar.move()
+        this.ball.moveBall()
+
     }
   
     // Create a new method responsible for ending the game

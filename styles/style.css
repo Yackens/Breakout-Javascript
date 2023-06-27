@@ -59,11 +59,16 @@ body {
     border-radius: 10%;
 
   }
+  .ball {
+    border-radius: 100%;
+  }
 
   .tiles {
-    border-radius: 20%;
     display: none;
+  }
 
+  .actual_tiles {
+    border-radius: 10%;
   }
 
   @keyframes slide {

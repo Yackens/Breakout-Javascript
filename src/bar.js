@@ -6,7 +6,6 @@ class Bar {
         this.width = width;
         this.height = height;
         this.directionX = 0;
-        this.directionY = 0;
         this.element = document.createElement("img");
     
         this.element.src = imgSrc;
@@ -16,7 +15,7 @@ class Bar {
         this.element.style.left = `${left}px`;
         this.element.style.top = `${top}px`;
         this.element.className = "bar";
-
+        
         this.gameScreen.appendChild(this.element);
       }
   

@@ -1,43 +1,32 @@
 class Tiles {
-    constructor(gameScreen, left, top, width, height, color) {
+    constructor(gameScreen, left, top, color, className) {
         this.gameScreen = gameScreen;
         this.left = left;
-        this.width = width;
-        this.height = height;
         this.element = document.createElement("div");
-    
+        this.element.className = className;
+
         this.element.style.backgroundColor = color;
         this.element.style.position = "absolute";
-        this.element.style.width = `${width}px`;
-        this.element.style.height = `${height}px`;
-        this.element.className = "tiles";
+        this.element.style.width = `110px`;
+        this.element.style.height = `30px`;
+        this.element.style.left = `${left}px`;
+        this.element.style.top = `${top}px`;
     
         this.gameScreen.appendChild(this.element);
-      }
-  
-    hit() {
-      // Update bar's car position based on directionX
-      this.left += this.directionX;
-  
-      // Ensure the bar stays within the game screen
-      if (this.left < 10) {
-        this.left = 10;
-      }
-      if (this.left > this.gameScreen.offsetWidth - this.width - 10) {
-        this.left = this.gameScreen.offsetWidth - this.width - 10;
-      }
-  
-      // Update the bar's car position on the screen
-      this.updatePosition();
     }
 
-    updatePosition() {
-        this.element.style.left = `${this.left}px`;
-      }
-  
-    didCollide(obstacle) {
+    addLineTiles(top) {
+        let currentLeft = 5;
+        while (currentLeft + parseInt(this.element.style.width) <= parseInt(this.gameScreen.offsetWidth)) {
+            new Tiles(this.gameScreen, currentLeft, top, this.element.style.backgroundColor, "actual_tiles");
+            currentLeft = currentLeft + parseInt(this.element.style.width) + 10;
+        }
+    }
+    
+
+    didCollide(bar) {
       const playerRect = this.element.getBoundingClientRect();
-      const obstacleRect = obstacle.element.getBoundingClientRect();
+      const obstacleRect = bar.element.getBoundingClientRect();
   
       if (
         playerRect.left < obstacleRect.right &&
@@ -53,4 +42,5 @@ class Tiles {
       }
     }
   }
+  
   
