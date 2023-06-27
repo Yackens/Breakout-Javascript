@@ -25,11 +25,11 @@ class Bar {
       this.left += this.directionX;
   
       // Ensure the bar stays within the game screen
-      if (this.left < 30) {
-        this.left = 30;
+      if (this.left < 10) {
+        this.left = 10;
       }
-      if (this.left > this.gameScreen.offsetWidth - this.width - 20) {
-        this.left = this.gameScreen.offsetWidth - this.width - 20;
+      if (this.left > this.gameScreen.offsetWidth - this.width - 10) {
+        this.left = this.gameScreen.offsetWidth - this.width - 10;
       }
   
       // Update the bar's car position on the screen
