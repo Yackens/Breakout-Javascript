@@ -1,0 +1,130 @@
+body {
+    padding: 0;
+    text-align: center;
+    background: #fff;
+  }
+  
+  #game-intro {
+    padding: 20px 0px;
+  }
+  
+  #game-container {
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+  }
+  
+  #game-screen-1 {
+    display: none;
+    align-content: center;
+    overflow: hidden;
+    position: relative;
+    background-image: url(../img/level-1.jpg);
+    background-size: cover;
+  }
+
+  #game-screen-2 {
+    display: none;
+    align-content: center;
+    overflow: hidden;
+    position: relative;
+    background-image: url(../img/level-2.jpg);
+    background-size: cover;
+  }
+
+  #game-screen-3 {
+    display: none;
+    align-content: center;
+    overflow: hidden;
+    position: relative;
+    background-image: url(../img/level-3.jpg);
+    background-size: cover;
+  }
+
+  .score_points {
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .bar {
+    border-radius: 10%;
+
+  }
+
+  .tiles {
+    border-radius: 20%;
+    display: none;
+
+  }
+
+  @keyframes slide {
+    0% {
+      background-position: 0 -1000px;
+    }
+    95% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 0 50px;
+    }
+  }
+  
+  #game-end {
+    display: none;
+  }
+
+  #game-over {
+    display: none;
+  }
+  
+  
+  .game-intro p {
+    font-size: 18px;
+    font-family: "Monaco", "Lucida Console", "Courier New";
+  }
+  
+  .logo-img-name {
+    width: 350px;
+    margin: 50px;
+  }
+  .logo-img {
+    width: 200px;
+    margin: 30px;
+    color: orange;
+  }
+  
+  .arrows-img {
+    width: 200px;
+    margin: 30px;
+  }
+  
+  p {
+    font-size: 24px;
+    font-family: "Verdana", Helvetica, sans-serif;
+    font-weight: bolder;
+  }
+  
+  h1 {
+    font-size: 40px;
+    font-family: "Verdana", Helvetica, sans-serif;
+    font-weight: bolder;
+  }
+  
+  h2 {
+    font-size: 30px;
+    font-family: "Verdana", Helvetica, sans-serif;
+    font-weight: bolder;
+  }
+  
+  body button {
+    font-size: 30px;
+    background-color: #004387;
+    color: #fff;
+    padding: 20px 40px;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
