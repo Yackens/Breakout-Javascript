@@ -17,7 +17,7 @@ class Bar {
         this.element.className = "bar";
         
         this.gameScreen.appendChild(this.element);
-      }
+    }
   
     move() {
       // Update bar's car position based on directionX

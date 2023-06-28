@@ -20,24 +20,7 @@ class Ball {
 
       this.gameScreen.appendChild(this.element);
     }
-  
-    moveBall() {
-      // Update player's ball position based on directionX and directionY
-      this.left += this.directionX;
-      this.top -= this.directionY;
-  
-      // Ensure the bar bounces
-      if (this.left < 0 || this.left > this.gameScreen.offsetWidth - this.width) {
-        this.directionX = -this.directionX;
-      }
-      if (this.top < 0 || this.top > this.gameScreen.offsetHeight - this.height) {
-        this.directionY = -this.directionY;
-      }
-  
-      // Update the player's ball position on the screen
-      this.updatePosition();
-    }
-  
+    
     collisionBar(bar) {
       const playerRect = this.element.getBoundingClientRect();
       const barRect = bar.element.getBoundingClientRect();
@@ -47,7 +30,8 @@ class Ball {
         playerRect.right > barRect.left &&
         playerRect.top < barRect.bottom &&
         playerRect.bottom > barRect.top
-      ) {  
+      ) {
+
         return true;
       } else {
         return false;
@@ -71,6 +55,31 @@ class Ball {
           return false;
         }
       }
+    
+    liveLost() {
+        if (this.top > this.gameScreen.offsetHeight - this.height) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    moveBall() {
+        // Update player's ball position based on directionX and directionY
+        this.left += this.directionX;
+        this.top -= this.directionY;
+    
+        // Ensure the bar bounces
+        if (this.left < 0 || this.left > this.gameScreen.offsetWidth - this.width) {
+          this.directionX = -this.directionX;
+        }
+        if (this.top < 0) {
+          this.directionY = -this.directionY;
+        }
+    
+        // Update the player's ball position on the screen
+        this.updatePosition();
+    }
   
     updatePosition() {
       this.element.style.left = `${this.left}px`;

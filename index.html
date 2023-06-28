@@ -26,45 +26,36 @@
           <!-- #game-screen is initially hidden using CSS style display: none -->
           <div id="game-screen-1">
             <div class = "score_points">
-              <p>Score: <span id="score">0</span></p>
+              <p>Score: <span class="score">0</span></p>
               <p>Level 1</p>
-              <p>Lives: <span id="lives">3</span></p>
+              <p>Lives: <span class="lives">3</span></p>
             </div>
           </div>
           <div id="game-screen-2">
             <div class = "score_points">
-              <p>Score: <span id="score">0</span></p>
+              <p>Score: <span class="score">0</span></p>
               <p>Level 2</p>
-              <p>Lives: <span id="lives">3</span></p>
+              <p>Lives: <span class="lives">3</span></p>
             </div>
           </div>
           <div id="game-screen-3">
             <div class = "score_points">
-              <p>Score: <span id="score">0</span></p>
+              <p>Score: <span class="score">0</span></p>
               <p>Level 3</p>
-              <p>Lives: <span id="lives">3</span></p>
+              <p>Lives: <span class="lives">3</span></p>
             </div>
           </div>
           </div>
         </div>
       </div>
-      
+
       <!-- #game-end is initially hidden using CSS style display: none -->
       <div id="game-end">
         <img src="./img/logo_name.png" alt="" class="logo-img-name" />
         <br/>
         <img src="./img/logo.png" alt="" class="logo-img" />
-        <h1>Congratulations! You beated the game.</h1>
-        <h2 class="final_score"></h2>
-        <br/>
-        <button id="restart-button">Play Again.</button>
-      </div>
-      <div id="game-over">
-        <img src="./img/logo_name.png" alt="" class="logo-img-name" />
-        <br/>
-        <img src="./img/logo.png" alt="" class="logo-img" />
-        <h1>Game Over</h1>
-        <h2 class="final_score"></h2>
+        <h1 id="final_message"></h1>
+        <h2 id="final_score"></h2>
         <br/>
         <button id="restart-button">Play Again.</button>
       </div>
