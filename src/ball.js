@@ -22,41 +22,38 @@ class Ball {
     }
     
     collisionBar(bar) {
-      const playerRect = this.element.getBoundingClientRect();
+      const ballRect = this.element.getBoundingClientRect();
       const barRect = bar.element.getBoundingClientRect();
   
       if (
-        playerRect.left < barRect.right &&
-        playerRect.right > barRect.left &&
-        playerRect.top < barRect.bottom &&
-        playerRect.bottom > barRect.top
+        ballRect.left < barRect.right &&
+        ballRect.right > barRect.left &&
+        ballRect.top < barRect.bottom &&
+        ballRect.bottom > barRect.top
       ) {
-
         return true;
       } else {
         return false;
       }
     }
 
-    collisionTiles(tiles) {
-        const playerRect = this.element.getBoundingClientRect();
-        const tilesRect = tiles.element.getBoundingClientRect();
+    collisionTiles(tile) {
+        const ballRect = this.element.getBoundingClientRect();
+        const tileRect = tile.element.getBoundingClientRect();
     
         if (
-          playerRect.left < tilesRect.right &&
-          playerRect.right > tilesRect.left &&
-          playerRect.top < tilesRect.bottom &&
-          playerRect.bottom > tilesRect.top
+          ballRect.left < tileRect.right &&
+          ballRect.right > tileRect.left &&
+          ballRect.top < tileRect.bottom &&
+          ballRect.bottom > tileRect.top
         ) {
-          console.log("Crash!");
-    
           return true;
         } else {
           return false;
         }
       }
     
-    liveLost() {
+    livesLost() {
         if (this.top > this.gameScreen.offsetHeight - this.height) {
             return true;
         } else {

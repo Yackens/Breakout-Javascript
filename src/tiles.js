@@ -17,30 +17,21 @@ class Tiles {
 
     addLineTiles(top) {
         let currentLeft = 5;
+        const tiles = [];
+    
         while (currentLeft + parseInt(this.element.style.width) <= parseInt(this.gameScreen.offsetWidth)) {
-            new Tiles(this.gameScreen, currentLeft, top, this.element.style.backgroundColor, "actual_tiles");
+            const tile = new Tiles(this.gameScreen, currentLeft, top, this.element.style.backgroundColor, "actual_tiles");
+            tiles.push(tile);
             currentLeft = currentLeft + parseInt(this.element.style.width) + 10;
         }
-    }
     
-
-    didCollide(bar) {
-      const playerRect = this.element.getBoundingClientRect();
-      const obstacleRect = bar.element.getBoundingClientRect();
-  
-      if (
-        playerRect.left < obstacleRect.right &&
-        playerRect.right > obstacleRect.left &&
-        playerRect.top < obstacleRect.bottom &&
-        playerRect.bottom > obstacleRect.top
-      ) {
-        console.log("Crash!");
-  
-        return true;
-      } else {
-        return false;
-      }
+        return tiles;
     }
+
+    remove() {
+        this.element.remove();
+      }
+
   }
   
   

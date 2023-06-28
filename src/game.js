@@ -65,14 +65,13 @@ class Game {
         this.gameScreen1.style.display = "block";
         this.gameOverall.style.display = "block";
 
-        // Add the tiles
-        this.tiles_green.addLineTiles(80);
-        this.tiles_green.addLineTiles(120);
-        this.tiles_green.addLineTiles(160);
+        // Add the tiles per row
+        this.tiles.push(...this.tiles_green.addLineTiles(80));
+        this.tiles.push(...this.tiles_green.addLineTiles(120));
 
         //
         this.gameLoop();
-
+        console.log(this.tiles)
     }
 
     level_2() {
@@ -86,12 +85,10 @@ class Game {
         this.gameScreen2.style.display = "block";
         this.gameOverall.style.display = "block";
 
-
-        // Add the tiles
-        this.tiles_blue.addLineTiles(80);
-        this.tiles_blue.addLineTiles(120);
-        this.tiles_green.addLineTiles(160);
-        this.tiles_green.addLineTiles(200);
+        // Add the tiles per row
+        this.tiles.push(...this.tiles_blue.addLineTiles(80));
+        this.tiles.push(...this.tiles_blue.addLineTiles(120));
+        this.tiles.push(...this.tiles_green.addLineTiles(160));
 
         //
         this.gameLoop();
@@ -108,13 +105,11 @@ class Game {
         this.gameScreen3.style.display = "block";
         this.gameOverall.style.display = "block";
 
-
         // Add the tiles
-        this.tiles_orange.addLineTiles(80);
-        this.tiles_orange.addLineTiles(120);
-        this.tiles_blue.addLineTiles(160);
-        this.tiles_blue.addLineTiles(200);
-        this.tiles_green.addLineTiles(240);
+        this.tiles.push(...this.tiles_orange.addLineTiles(80));
+        this.tiles.push(...this.tiles_orange.addLineTiles(120));
+        this.tiles.push(...this.tiles_blue.addLineTiles(160));
+        this.tiles.push(...this.tiles_green.addLineTiles(200));
     
         //
         this.gameLoop();
@@ -131,27 +126,66 @@ class Game {
     update() {
         this.bar.move()
         this.ball.moveBall()
+
+        let scoreElement = document.getElementsByClassName("score")[0];
+        let livesElement = document.getElementsByClassName("lives")[0];
+
+        if (this.tiles.length === 0 && this.score <= 300) {
+            this.level_2();
+            this.ball.element.remove();
+            this.ball = new Ball(this.gameOverall, this.bar.left+50, this.bar.top-50, 35, 35, "yellow");
+            scoreElement = document.getElementsByClassName("score")[1];
+            livesElement = document.getElementsByClassName("lives")[1];
+
+        }
+
+        else if (this.tiles.length === 0 && this.score > 300) {
+            this.level_3();
+            this.ball.element.remove();
+            this.ball = new Ball(this.gameOverall, this.bar.left+50, this.bar.top-50, 35, 35, "yellow");
+            scoreElement = document.getElementsByClassName("score")[2];
+            livesElement = document.getElementsByClassName("lives")[2];
+
+        }
+
         // Case when ball hits the bar
         if (this.ball.collisionBar(this.bar)) {
             this.ball.directionY = -this.ball.directionY;
         }
 
-        for (let i = 0; i < this.tiles_green.length; i+=1) {
-            const tile = this.tiles_green[i];
-            if (this.ball.collisionBar(tile)) {
-                // Remove the tile element from the DOM
-                tile.element.remove();
-                // Remove tile object from the array
-                this.tiles.splice(i, 1);
-                // Reduce player's lives by 1 and add it to the screen
-                this.score+= 10;
-                document.querySelector(".score").innerHTML = this.lives;
-            }
-        }
+        for (let i = 0; i < this.tiles.length; i++) {
+            const tile = this.tiles[i];
 
-        if (this.ball.liveLost()) {
+            if (this.ball.collisionTiles(tile)) {
+                if (tile.element.style.backgroundColor === "orange") {
+                    tile.element.style.backgroundColor = "blue";
+                }
+
+                else if (tile.element.style.backgroundColor === "blue") {
+                    tile.element.style.backgroundColor = "green";
+                }
+
+                else {
+                     // Remove the tile element from the DOM
+                    tile.element.remove();
+                    // Remove tile object from the array
+                    this.tiles.splice(i, 1);
+                    // Adjust the loop index to account for the removed tile
+                    i--;
+                }
+
+                // Increase the score
+                this.score += 10;
+                scoreElement.innerHTML = this.score;
+                // Change the ball's direction
+                this.ball.directionY = -this.ball.directionY;
+                break;
+            }
+          }
+
+        if (this.ball.livesLost()) {
             this.lives --;
-            document.querySelector(".lives").innerHTML = this.lives;
+            livesElement.innerHTML = this.lives;
             this.ball.element.remove();
             if ( this.lives > 0) {
                     this.ball = new Ball(this.gameOverall, this.bar.left+50, this.bar.top-50, 35, 35, "yellow");
@@ -161,13 +195,13 @@ class Game {
         if (this.lives <= 0) {
             this.endGame();
           }
-      
 
     }
   
     // Create a new method responsible for ending the game
     endGame() {
         this.bar.element.remove();
+        this.tiles.forEach(function (tile) {tile.element.remove()});
       
         // Hide game screen
         this.gameScreen1.style.display = "none";

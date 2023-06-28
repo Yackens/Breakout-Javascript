@@ -43,17 +43,26 @@ window.onload = function () {
           case "ArrowLeft":
           case "a":
           case "A":
-            game.bar.directionX = -6;
+            game.bar.directionX = -10;
             break;
           case "ArrowRight":
           case "d":
           case "D":
-            game.bar.directionX = 6;
+            game.bar.directionX = 10;
             break;
         }
       }
   }
+
+  function handleKeyup(event) {
+    const key = event.key;
+    
+    // Reset bar's directionX when the corresponding key is released
+    if (key === "ArrowLeft" || key === "ArrowRight" || key === "a" || key === "A" || key === "d" || key === "D") {
+      game.bar.directionX = 0;
+    }
+  }
   // Add the handleKeydown function as an event listener for the keydown event
   window.addEventListener("keydown", handleKeydown);
+  window.addEventListener("keyup", handleKeyup);
 };
-  
