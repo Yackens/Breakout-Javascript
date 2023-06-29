@@ -19,6 +19,10 @@ class Ball {
       this.element.className = "ball";
 
       this.gameScreen.appendChild(this.element);
+
+      // Add wall bounce audio
+      this.wallBounceAudio = new Audio('./media/ball-bounce-wall.wav');
+
     }
     
     collisionBar(bar) {
@@ -46,8 +50,7 @@ class Ball {
           ballRect.right > tileRect.left &&
           ballRect.top < tileRect.bottom &&
           ballRect.bottom > tileRect.top
-        ) {
-          return true;
+        ) {return true;
         } else {
           return false;
         }
@@ -65,13 +68,15 @@ class Ball {
         // Update player's ball position based on directionX and directionY
         this.left += this.directionX;
         this.top -= this.directionY;
-    
+
         // Ensure the bar bounces
         if (this.left < 0 || this.left > this.gameScreen.offsetWidth - this.width) {
-          this.directionX = -this.directionX;
+            this.wallBounceAudio.play()
+            this.directionX = -this.directionX;
         }
         if (this.top < 0) {
-          this.directionY = -this.directionY;
+            this.wallBounceAudio.play()
+            this.directionY = -this.directionY;
         }
     
         // Update the player's ball position on the screen
