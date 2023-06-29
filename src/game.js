@@ -22,6 +22,13 @@ class Game {
             35,
             "yellow"
         )
+        this.tiles_lime = new Tiles(
+            this.gameOverall,
+            5,
+            0,
+            "lime",
+            "tiles",
+        );
         this.tiles_green = new Tiles(
             this.gameOverall,
             5,
@@ -29,18 +36,11 @@ class Game {
             "green",
             "tiles",
         );
-        this.tiles_blue = new Tiles(
+        this.tiles_lightseagreen = new Tiles(
             this.gameOverall,
             5,
             0,
-            "blue",
-            "tiles",
-        );
-        this.tiles_red = new Tiles(
-            this.gameOverall,
-            5,
-            0,
-            "red",
+            "lightseagreen",
             "tiles",
         );
         this.height = 800;
@@ -75,8 +75,8 @@ class Game {
         this.gameOverall.style.display = "block";
 
         // Add the tiles per row
-        this.tiles.push(...this.tiles_green.addLineTiles(80));
-        this.tiles.push(...this.tiles_green.addLineTiles(120));
+        this.tiles.push(...this.tiles_lime.addLineTiles(80));
+        this.tiles.push(...this.tiles_lime.addLineTiles(120));
 
         //
         this.gameLoop();
@@ -94,9 +94,9 @@ class Game {
         this.gameOverall.style.display = "block";
 
         // Add the tiles per row
-        this.tiles.push(...this.tiles_blue.addLineTiles(80));
-        this.tiles.push(...this.tiles_blue.addLineTiles(120));
-        this.tiles.push(...this.tiles_green.addLineTiles(160));
+        this.tiles.push(...this.tiles_green.addLineTiles(80));
+        this.tiles.push(...this.tiles_green.addLineTiles(120));
+        this.tiles.push(...this.tiles_lime.addLineTiles(160));
 
         //
         this.gameLoop();
@@ -114,10 +114,10 @@ class Game {
         this.gameOverall.style.display = "block";
 
         // Add the tiles
-        this.tiles.push(...this.tiles_red.addLineTiles(80));
-        this.tiles.push(...this.tiles_red.addLineTiles(120));
-        this.tiles.push(...this.tiles_blue.addLineTiles(160));
-        this.tiles.push(...this.tiles_green.addLineTiles(200));
+        this.tiles.push(...this.tiles_lightseagreen.addLineTiles(80));
+        this.tiles.push(...this.tiles_lightseagreen.addLineTiles(120));
+        this.tiles.push(...this.tiles_green.addLineTiles(160));
+        this.tiles.push(...this.tiles_lime.addLineTiles(200));
     
         //
         this.gameLoop();
@@ -161,12 +161,12 @@ class Game {
 
             if (this.ball.collisionTiles(tile)) {
                 this.tileBounceAudio.play()
-                if (tile.element.style.backgroundColor === "red") {
-                    tile.element.style.backgroundColor = "blue";
+                if (tile.element.style.backgroundColor === "lightseagreen") {
+                    tile.element.style.backgroundColor = "green";
                 }
 
-                else if (tile.element.style.backgroundColor === "blue") {
-                    tile.element.style.backgroundColor = "green";
+                else if (tile.element.style.backgroundColor === "green") {
+                    tile.element.style.backgroundColor = "lime";
                 }
 
                 else {

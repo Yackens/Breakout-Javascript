@@ -21,6 +21,7 @@ body {
     position: relative;
   }
   
+  
   #game-screen-1 {
     display: none;
     align-content: center;
@@ -44,7 +45,7 @@ body {
     align-content: center;
     overflow: hidden;
     position: relative;
-    background-image: url(../img/level-3.jpg);
+    background-image: url(../img/level-3.avif);
     background-size: cover;
   }
 
