@@ -1,13 +1,18 @@
 window.onload = function () {
+  // Click Sound
+  let levelUpAudio = new Audio('./media/click.wav');
+
   const startButton = document.getElementById("start-button");
   const restartButton = document.getElementById("restart-button");
   let game;
   
   startButton.addEventListener("click", () => {
+    levelUpAudio.play()
     startGame();
   });
   
   restartButton.addEventListener("click", () => {
+    levelUpAudio.play()
     // Call the restartGame function when the button is clicked
     restartGame();
   });

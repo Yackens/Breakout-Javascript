@@ -53,6 +53,7 @@ class Game {
         this.gameOverall.style.width = `${this.width}px`;
 
         // Add sounds
+        this.backgroundMusic = new Audio('./media/background-music.mp3');
         this.levelUpAudio = new Audio('./media/level-up.mp3');
         this.wallBounceAudio = new Audio('./media/ball-bounce-wall.wav');
         this.tileBounceAudio = new Audio('./media/ball-bounce-tiles.mp3');
@@ -133,6 +134,7 @@ class Game {
     update() {
         this.bar.move()
         this.ball.moveBall()
+        this.backgroundMusic.play()
 
         if (this.tiles.length === 0 && this.score <= 300) {
             this.ball.element.remove();
@@ -208,6 +210,9 @@ class Game {
     endGame() {
         this.bar.element.remove();
         this.tiles.forEach(function (tile) {tile.element.remove()});
+
+        // Stop Music
+        this.backgroundMusic.pause()
       
         // Hide game screen
         this.gameOverall.style.display = "none";
